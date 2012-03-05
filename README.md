@@ -22,6 +22,14 @@ To use, it's best if you have a modern Ruby environment set up with
 rvm/rbenv and bundler. Clone the repository and run `bundle install` to
 pull dependencies. Then run `rackup` to run the development server.
 
+### Usage
+
+This is one component of software to secure your application; the other
+client-side component should perform key retrieval, and for better
+security, key encryption (using a passphrase) before pushing to
+Keyserve. This type of functionality is being built, for example, into
+the HIPAARails Rails 3 module https://github.com/oakenshield/hipaarails.
+
 ### Admin
 See config.rb to set the admin username, email and password. Only the
 admin can add and create new users (via the API). Each new user gets an
@@ -44,7 +52,6 @@ empty password. For example:
 the key type, description, and user ID it is for. 
 4. `PUT /key/3`: Updates key ID 3 with specified arguments
 5. `DELETE /key/3`: Deletes key ID 3
-
 
 ### Being worked on
 
