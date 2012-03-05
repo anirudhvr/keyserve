@@ -48,9 +48,14 @@ the key type, description, and user ID it is for.
 
 ### Being worked on
 
+0. HTTPS support. Not really much to do at my end, but config options
+would be nice. Can be done with Webrick/Sinatra as outlined here:
+http://stackoverflow.com/questions/3696558/how-to-make-sinatra-work-over-https-ssl
 1. Storage services: Currently, the data is stored in an sqlite database
 but I want to add multiple backend choices including S3, MySQL, etc.
-2. Web frontend. Will show the stuff available as JSON in a pretty
+2. Assembling key from multiple sources: To add extra redundancy and
+security, we want to allow the user to store a key at n multiple locations
+and be able to reconstruct the key from k of these locations (where k < n)
+3. Web frontend. Will show the stuff available as JSON in a pretty
 format. Early screenshots here: blog.nouvou.com/introducing-nouvous-key-management-service
-
 
