@@ -1,0 +1,2 @@
+module Sinatra::Partials
+end

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Title</title>
+    <%= partial(:'partials/stylesheets') %>
+    <%= partial(:'partials/javascripts') %>
+  </head>
+
+  <body>
+      <%= partial(:'partials/header') %>
+
+      <div class="container-fluid">
+          <div class="row-fluid">
+          <%= partial(:'partials/sidebar') %>
+              <div class="span9">
+                  <%= yield %>
+              </div><!--/span-->
+          </div><!--/row-->
+
+          <hr>
+
+      <%= partial(:'partials/footer') %>
+
+      </div>
+
+       
+  </body>
+
+</html>
