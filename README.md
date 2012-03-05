@@ -59,7 +59,9 @@ the key type, description, and user ID it is for.
 would be nice. Can be done with Webrick/Sinatra as outlined here:
 http://stackoverflow.com/questions/3696558/how-to-make-sinatra-work-over-https-ssl
 1. Storage services: Currently, the data is stored in an sqlite database
-but I want to add multiple backend choices including S3, MySQL, etc.
+but I want to add multiple backend choices including Amazon S3, MySQL, etc.
+2. Automated key expiration and rotation. Key expiration is easy to implement, but
+rotation will require support from the client side.
 2. Assembling key from multiple sources: To add extra redundancy and
 security, we want to allow the user to store a key at n multiple locations
 and be able to reconstruct the key from k of these locations (where k < n)
