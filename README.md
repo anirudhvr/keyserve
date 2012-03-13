@@ -58,10 +58,15 @@ your AWS access credentials and the encryption key and initiailization
 vector (to encrypt the DB), and put these in your environment variable.
 For example, if you are using bash, put the following in a file and
 source it before running the app. 
+
 `export AMAZON_ACCESS_KEY_ID='mykeyid'`
+
 `export AMAZON_SECRET_ACCESS_KEY='mysecret'`
+
 `export DB_ENCRYPTION_KEY="myenckey"`
+
 `export DB_ENCRYPTION_IV="myenciv"`
+
 3. You can create keys/IVs for your chosen encryption algo using
 `scripts/create_key_iv.rb`
 
@@ -74,7 +79,7 @@ Each user can have several encryption keys, but only one API key. The
 API key must be provided with each request as the username, with an
 empty password. For example: 
 
-`curl -u 9627f30495f26b8f02f500d80c0ad171: https://localhost:9292/keys`
+`curl -u 9627f30495f26b8f02f500d80c0ad171: https://localhost:8443/keys`
 
 1. `GET /keys`: Get the keys for a user. Outputs a JSON encoded list of keys.
 2. `GET /key/3`: Gets the details for key ID 3 for the specified usero
