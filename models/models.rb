@@ -15,6 +15,7 @@ module KeyServer::Models
             :default => lambda {|r,p| SecureRandom.hex(16) } # 128 bits 
         property :created_at,   DateTime, :default => Time.now
         property :last_access,  DateTime, :default => Time.now
+        property :is_admin,     Boolean,  :default => false
 
         has n, :keys
 
@@ -51,8 +52,4 @@ module KeyServer::Models
             @@ciphers.include?(type)
         end
     end
-
-
-
-
 end

@@ -11,6 +11,21 @@ based using a REST-style API that returns JSON-encoded responses.
 
 This project is a work in progress.
 
+Features
+--------
+
+1. Has users, each of whom can have many keys. The first user is
+automatically created ('admin', password set in the config). Subsequent
+users can be added by users with admin privileges (tbd).
+2. Keys, of which a user can have many. 
+    A new key can be created by POSTing to /keys with the appropriate
+    post params. 
+    A key can be retrieved by 'GET'ing a unique URL (e.g., GET /key/1).
+    A key can be updated by 'PUT'ing to /key/:id
+    A key can be deleted by sending HTTP DELETE to /key/:id
+3. Encrypted backup of the key database on shutdown to an S3 bucket, and
+secure retrieval of the bucket on startup
+4. All API requests are served over HTTPS
 
 Installation & Usage
 --------------------
@@ -22,6 +37,10 @@ To use, it's best if you have a modern Ruby environment set up with
 rvm/rbenv and bundler. Clone the repository and run `bundle install` to
 pull dependencies. Then run `rackup` to run the development server.
 
+### Running
+$ `bundle install`
+$ `rackup config/config.ru`
+
 ### Usage
 
 This is one component of software to secure your application; the other
@@ -31,9 +50,20 @@ Keyserve. This type of functionality is being built, for example, into
 the HIPAARails Rails 3 module https://github.com/oakenshield/hipaarails.
 
 ### Admin
-See config.rb to set the admin username, email and password. Only the
-admin can add and create new users (via the API). Each new user gets an
-api key which must be provided with each request. 
+1. See config/config.rb to set the admin username, email and password.
+Only the admin can add and create new users (via the API). Each new user
+gets an api key which must be provided with each request. 
+2. To enable S3 backup/retrieval, you will want to create a file with
+your AWS access credentials and the encryption key and initiailization
+vector (to encrypt the DB), and put these in your environment variable.
+For example, if you are using bash, put the following in a file and
+source it before running the app. 
+`export AMAZON_ACCESS_KEY_ID='mykeyid'`
+`export AMAZON_SECRET_ACCESS_KEY='mysecret'`
+`export DB_ENCRYPTION_KEY="myenckey"`
+`export DB_ENCRYPTION_IV="myenciv"`
+3. You can create keys/IVs for your chosen encryption algo using
+`scripts/create_key_iv.rb`
 
 API
 ---
@@ -55,16 +85,14 @@ the key type, description, and user ID it is for.
 
 ### Being worked on
 
-0. HTTPS support. Not really much to do at my end, but config options
-would be nice. Can be done with Webrick/Sinatra as outlined here:
-http://stackoverflow.com/questions/3696558/how-to-make-sinatra-work-over-https-ssl
-1. Storage services: Currently, the data is stored in an sqlite database
-but I want to add multiple backend choices including Amazon S3, MySQL, etc.
-2. Automated key expiration and rotation. Key expiration is easy to implement, but
+1. Automated key expiration and rotation. Key expiration is easy to implement, but
 rotation will require support from the client side.
-2. Assembling key from multiple sources: To add extra redundancy and
+2. Storage services: Currently, the data is stored in an sqlite database
+and backed up to S3, but perhaps there could be other choices such as
+MySQL, Redis, etc. 
+3. Assembling key from multiple sources: To add extra redundancy and
 security, we want to allow the user to store a key at n multiple locations
 and be able to reconstruct the key from k of these locations (where k < n)
-3. Web frontend. Will show the stuff available as JSON in a pretty
+4. Web frontend. Will show the stuff available as JSON in a pretty
 format. Early screenshots here: blog.nouvou.com/introducing-nouvous-key-management-service
 

@@ -31,16 +31,20 @@ module KeyServer
         # Database config
         #
         db_type: 'sqlite',
-        db_sync: 's3',
+        db_backup: 's3',
 
         # sqlite config options 
-        sqlite_path: '/home/ubuntu/client-daemon/key-mgmt-server/sqlite.db',
+        sqlite_path: '/home/ubuntu/client-daemon/key-mgmt-server/db/sqlite.db',
 
         # AWS S3 config options
-        s3_access_key_id: 'AKIAIA2RP3QAYPMTY7WA',
-        s3_secret_access_key: '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',
-        s3_bucketname: 'keybucket',
-        s3_dbname:      'key_db' # the filename of the db in teh bucket
+        s3_access_key_id:           ENV['AMAZON_ACCESS_KEY_ID'],
+        s3_secret_access_key:       ENV['AMAZON_SECRET_ACCESS_KEY'],
+        s3_bucketname:              'keybucket',
+        s3_dbname:                  'key_db', # the filename of the db in the bucket
+        s3_db_encrypt:              'yes', # encrypt/decrypt data in S3 storage
+        s3_db_encryption_cipher:    'aes-256-cbc', # one of the modes from model.rb
+        s3_db_encryption_key:       ENV['DB_ENCRYPTION_KEY'],  # hex
+        s3_db_encryption_iv:        ENV['DB_ENCRYPTION_IV'] # hex
 
     }.each do |k,v|
         KeyServer::Config.instance[k] = v
