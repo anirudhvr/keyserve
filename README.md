@@ -90,17 +90,13 @@ the key type, description, and user ID it is for.
 
 ### Being worked on
 
-1. Automated key expiration and rotation. Key expiration is easy to implement, but
-rotation will require support from the client side.
+1. Automated key expiration and rotation. Key expiration is easy to implement, but rotation will require support from the client side.
 2. Multiple users and roles. 
-3 Storage services: Currently, the data is stored in an sqlite database
-and backed up to S3, but perhaps there could be other choices such as
+3 Storage services: Currently, the data is stored in an sqlite databaseand backed up to S3, but perhaps there could be other choices such as
 MySQL, Redis, etc. 
-4 Assembling key from multiple sources: To add extra redundancy and
-security, we want to allow the user to store a key at n multiple locations
+4 Assembling key from multiple sources: To add extra redundancy and security, we want to allow the user to store a key at n multiple locations
 and be able to reconstruct the key from k of these locations (where k < n)
-5 Web frontend. Will show the stuff available as JSON in a pretty
-format. Early screenshots here: blog.nouvou.com/introducing-nouvous-key-management-service
+5 Web frontend. Will show the stuff available as JSON in a pretty format. Early screenshots here: blog.nouvou.com/introducing-nouvous-key-management-service
 
 
 ### Bug reports
