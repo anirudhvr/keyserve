@@ -40,6 +40,7 @@ class KeyMgmtServer < Sinatra::Base
     end
 
     configure do 
+        set :views, settings.root + '/../views'
         # ensure config files are read
         set :config, KeyServer::Config.instance
 
@@ -100,7 +101,7 @@ class KeyMgmtServer < Sinatra::Base
             DataMapper.auto_migrate! 
             # set up an admin user
             u = User.create(name: settings.config[:admin_username], email:
-                            settings.config[:admin_email], admin: true)
+                            settings.config[:admin_email], is_admin: true)
             k = Key.create(user: u, desc: "test key")
             puts "created user: #{u.name}, #{u.api_key}"
         end
